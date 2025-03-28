@@ -1,0 +1,11 @@
+{
+    "access_token": "e3dbcac9810f432cbcd448d96ca061e1",
+    "expires_in": 14400,
+    "expires_at": 1743175219.823152,
+    "token_type": "bearer",
+    "client_id": "3f69e56c7649492c8cc29f1af08a8a12",
+    "internal_client": true,
+    "client_service": "prod-fn",
+    "product_id": "prod-fn",
+    "application_id": "fghi4567FNFBKFz3E4TROb0bmPS8h1GW"
+}
