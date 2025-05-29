@@ -173,9 +173,9 @@ async def check_for_new_packs(session):
         new_data[pack_name] = record
 
     if changes_detected:
-        # Always ping once (even if only one change)
+        # Always ping 
         for idx, args in enumerate(changes):
-            if idx == 0:
+            for args in changes:
                 await send_notification(session, *args, content=f"<@&{ROLE_ID}>")
             else:
                 await send_notification(session, *args)
