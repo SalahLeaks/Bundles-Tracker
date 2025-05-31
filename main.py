@@ -165,22 +165,28 @@ async def check_for_new_packs(session):
 
         if old_data.get(pack_name) != record:
             logging.info(f"Change detected: {pack_name}")
-            changes.append((pack_name, pack_price, pack_description,
-                            wide_image_url, tall_image_url,
-                            activation_date, expiration_date))
+            changes.append(
+                (pack_name,
+                 pack_price,
+                 pack_description,
+                 wide_image_url,
+                 tall_image_url,
+                 activation_date,
+                 expiration_date)
+            )
             changes_detected = True
 
         new_data[pack_name] = record
 
     if changes_detected:
-        # Always ping 
-        for idx, args in enumerate(changes):
-            for args in changes:
-                await send_notification(session, *args, content=f"<@&{ROLE_ID}>")
-            else:
-                await send_notification(session, *args)
+        # Send one notification per changed pack, always ping the role
+        for change_args in changes:
+            await send_notification(session, *change_args, content=f"<@&{ROLE_ID}>")
+
+        # Overwrite old data with new data
         with open(JSON_FILE, "w") as f:
             json.dump(new_data, f, indent=4)
+
         logging.info("Changes detected, updating stored data.")
     else:
         logging.info("No changes detected.")
